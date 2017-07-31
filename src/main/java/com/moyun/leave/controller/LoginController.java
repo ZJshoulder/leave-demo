@@ -24,6 +24,7 @@ public class LoginController extends BaseController {
 	public String toLogin(@RequestParam("userId")String userId,HttpSession session){
 		User user= identityService.createUserQuery().userId(userId).singleResult();
 		if(user != null){
+			user.getEmail();
 			Group group = identityService.createGroupQuery().groupMember(userId).singleResult();
 			UserUtil.saveUserToSession(session, user);
 			session.setAttribute("group", group);
